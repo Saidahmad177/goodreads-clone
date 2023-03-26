@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book list</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
+{% block title %} Books list {% endblock %}
+
+{% block content %}
     <h1>Book List</h1>
     {% if books %}
         <ul>
@@ -17,6 +14,4 @@
         No books data.
 
     {% endif %}
-
-</body>
-</html>
+{% endblock %}

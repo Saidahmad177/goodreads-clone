@@ -1,8 +1,10 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from .forms import SignUpForm, LoginForm
+from django.contrib import messages
 
 
 class SignUpView(View):
@@ -18,7 +20,7 @@ class SignUpView(View):
         if form.is_valid():
             form.save()
 
-            return redirect('users:login_page')
+            return redirect('users:login')
 
         else:
             context = {
@@ -38,8 +40,20 @@ class LoginView(View):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home_page')
+            messages.success(request, 'Successfully logged in')
+            return redirect('book:books_list')
 
         else:
             return render(request, 'users/login.html', {'form': form})
 
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        messages.info(request, 'You have logged out')
+        return redirect('home_page')
+
+
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'users/profile.html', {'user': request.user})

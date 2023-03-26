@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book detail</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
+{% block title %} {{ book_detail.title }} {% endblock %}
+
+{% block content %}
     <h1>Book Detail</h1>
     <h3>{{ book_detail.title }}</h3>
     <p>{{ book_detail.description }}</p>
     <p>{{ book_detail.isbn }}</p>
-
-</body>
-</html>
+{% endblock %}
