@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import CustomUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -32,7 +32,7 @@ class BookAuthor(models.Model):
 
 
 class BookReview(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     book_name = models.ForeignKey(Book, on_delete=models.CASCADE)
     comment = models.TextField()
     stars = models.IntegerField(

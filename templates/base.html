@@ -7,13 +7,18 @@
     <style>
         .fffd{
             padding: 6px;
+            background-color: bisque;
+            margin-top: 0;
+        }
+        a {
+            font-family: sans-serif;
         }
     </style>
 </head>
 <body>
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid fffd" style="background-color: bisque; margin-top: 0">
+          <div class="container-fluid fffd">
             <a class="navbar-brand ms-5" href="#">
               <img src="../media/logo/Goodreads_logo.png" alt="Goodreads" width="60" height="54">
             </a>
@@ -34,8 +39,12 @@
               </ul>
 
                 {% if not request.user.is_authenticated %}
-                    <div class="nav-item me-4">
+                    <div class="nav-item me-3">
                       <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+
+                    </div>
+                    <div class="nav-item me-5">
+                      <button class=" btn btn-primary" type="button"><a class="nav-link px-3" href="{% url 'users:signup' %}">Sign Up</a></button>
                     </div>
                 {% else %}
 
@@ -59,7 +68,9 @@
         <div class="container">
     {% if messages %}
         {% for message in messages %}
-            <p>{{ message }}</p>
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
         {% endfor %}
     {% endif %}
 
