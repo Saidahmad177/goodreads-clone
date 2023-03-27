@@ -41,7 +41,7 @@ class LoginView(View):
             user = form.get_user()
             login(request, user)
             messages.success(request, 'Successfully logged in')
-            return redirect('book:books_list')
+            return redirect('home_page')
 
         else:
             return render(request, 'users/login.html', {'form': form})

@@ -34,11 +34,11 @@
 
                 {% if not request.user.is_authenticated %}
                     <div class="nav-item me-3">
-                      <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                      <a class="nav-link text-muted nav_login" href="{% url 'users:login' %}">Login</a>
 
                     </div>
                     <div class="nav-item me-5">
-                      <button class=" btn btn-primary" type="button"><a class="nav-link px-3" href="{% url 'users:signup' %}">Sign Up</a></button>
+                      <button class=" btn btn-primary nav_btn" type="button"><a class="nav-link px-3" href="{% url 'users:signup' %}">Sign Up</a></button>
                     </div>
                 {% else %}
 
