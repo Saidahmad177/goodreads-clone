@@ -1,0 +1,40 @@
+* {
+    margin: 0 0;
+}
+
+.navbar_item3 {
+    background-color: #F4F1EA !important;
+    margin-top: 0;
+    color: #3b2514;
+    font-family: optima, sans-serif;
+}
+
+.goodreads_logo{width: 180px}
+
+.navbar_m > li > a{ margin-left: 10px; color: #3b2514;}
+.navbar_m > li > a:hover{ font-size: large; font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: .25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+.me-2 {
+    margin-right: .5rem!important;
+}
+
+.padd{
+    margin-top: 30px;
+}
+
+
+
+

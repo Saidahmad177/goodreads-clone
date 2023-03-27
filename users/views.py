@@ -55,20 +55,19 @@ class LogoutView(View):
 
 
 class ProfileView(LoginRequiredMixin, View):
-    def get(self, request):
-        return render(request, 'users/profile.html', {'user': request.user})
+    # def get(self, request):
+    #     return render(request, 'users/profile.html', {'user': request.user})
 
-
-class ProfileUpdateView(View):
     def get(self, request):
         form = ProfileUpdateForm(instance=request.user)
-        return render(request, 'users/profile_update.html', {'form': form})
+        return render(request, 'users/profile.html', {'form': form})
 
     def post(self, request):
-        form = ProfileUpdateForm(instance=request.user, data=request.POST)
+        form = ProfileUpdateForm(instance=request.user, data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'You have successfully update profile')
             return redirect('users:profile')
 
-        return render(request, 'users/profile_update.html', {'form': form})
+        return render(request, 'users/profile.html', {'form': form})
+
