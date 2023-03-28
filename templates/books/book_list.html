@@ -3,13 +3,25 @@
 {% block title %} Books list {% endblock %}
 
 {% block content %}
-    <h1>Book List</h1>
     {% if books %}
-        <ul>
-            {% for book in books %}
-                <a href="{% url 'book:detail_view' book.id %}"><li>{{ book.title }}</li></a><br>
-            {% endfor %}
-        </ul>
+{#        <ul>#}
+{#            {% for book in books %}#}
+{#                <a href="{% url 'book:detail_view' book.id %}"><li>{{ book.name }}</li></a><br>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+
+        {% for book in books %}
+            <div class="row mb-4">
+                <div class="col-2">
+                    <img class="books_list_image" src="{{ book.book_image.url }}" alt="">
+                </div>
+                <div class="col-7">
+                    <h3>{{ book.name }}</h3>
+                    <p class="mt-3">{{ book.description | truncatechars:240 }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
     {% else %}
         No books data.
 

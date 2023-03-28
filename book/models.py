@@ -4,10 +4,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Book(models.Model):
-    name = models.CharField(max_length=50)
-    title = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     description = models.TextField()
     isbn = models.CharField(max_length=17)
+    book_image = models.ImageField(upload_to='books/', default='default_book.jpg')
 
     def __str__(self):
         return self.name

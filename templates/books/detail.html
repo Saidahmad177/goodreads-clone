@@ -3,8 +3,17 @@
 {% block title %} {{ book_detail.title }} {% endblock %}
 
 {% block content %}
-    <h1>Book Detail</h1>
-    <h3>{{ book_detail.title }}</h3>
-    <p>{{ book_detail.description }}</p>
-    <p>{{ book_detail.isbn }}</p>
+    <div class="row mt-3">
+        <div class="col-3">
+            <img class="book_image" src="{{ book_detail.book_image.url }}" alt="">
+        </div>
+
+        <div class="col-7">
+            <h3>{{ book_detail.name }}</h3>
+            <p class="text-muted">{{ book_detail.description }}</p>
+            <p>ISBN: {{ book_detail.isbn }}</p>
+        </div>
+    </div>
+
+
 {% endblock %}

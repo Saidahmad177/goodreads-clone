@@ -3,12 +3,11 @@ from book.models import Book, Author, BookAuthor, BookReview
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', )
-    search_fields = ('title', 'description', 'isbn')
+    list_display = ('name', )
+    search_fields = ('name', 'description', 'isbn')
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'email')
     search_fields = ('first_name', 'last_name', 'email', 'bio')
 
 

@@ -176,7 +176,7 @@ class ProfileTestCase(TestCase):
         self.client.login(username='testuser', password='testpassword')
 
         response = self.client.post(
-            reverse('users:profile_update'),
+            reverse('users:profile'),
             data={
                 'username': 'testuser',
                 'first_name': 'testname',
