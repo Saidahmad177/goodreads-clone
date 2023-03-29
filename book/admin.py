@@ -5,6 +5,7 @@ from book.models import Book, Author, BookAuthor, BookReview
 class BookAdmin(admin.ModelAdmin):
     list_display = ('name', )
     search_fields = ('name', 'description', 'isbn')
+    prepopulated_fields = {'slug': ('name', )}
 
 
 class AuthorAdmin(admin.ModelAdmin):

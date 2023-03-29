@@ -1,10 +1,12 @@
 from django.db import models
 from users.models import CustomUser
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.text import slugify
 
 
 class Book(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=50)
     description = models.TextField()
     isbn = models.CharField(max_length=17)
     book_image = models.ImageField(upload_to='books/', default='default_book.jpg')
