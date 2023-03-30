@@ -26,6 +26,12 @@ class BooksListView(View):
 class DetailView(View):
     def get(self, request, slug):
         book_data = Book.objects.get(slug=slug)
+        reviews = book_data.bookreview_set.all()
+        author_book = book_data.bookauthor_set.all()
+        context = {
+            'book_detail': book_data,
+            'reviews': reviews,
+            'book_author': author_book,
+        }
 
-        return render(request, 'books/detail.html', {'book_detail': book_data})
-
+        return render(request, 'books/detail.html', context)
