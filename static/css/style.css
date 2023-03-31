@@ -10,17 +10,14 @@
 /*navigation bar*/
 .navbar_item3 {
     background-color: #F4F1EA !important;
-    margin-top: 0 !important;
+
     color: #3b2514;
     font-family: optima, sans-serif;
     position: fixed !important;
     width: 100%;
     z-index: 1;
-
+    top: 0 !important;
 }
-.navbar-bottom{margin-top: 40px;}
-.large-navbar-bottom{margin-top: 100px}
-
 .goodreads_logo{width: 180px}
 
 .navbar_m > li > a{ margin-left: 10px; color: #3b2514;}
@@ -35,15 +32,13 @@
 
 /*end navigation bar*/
 
-/*profile page*/
 
-.review-user-image{width: 60px; height: 60px; border-radius: 50%}
 
 /*detail page styles*/
 .head-div {display: flex;flex-wrap: nowrap;overflow-x: auto;}
 .fixed-image {flex: 0 0 auto;position: fixed;top: 90px;left: 90px;}
 
-.detail_info{flex: 1 1 auto;overflow-y: auto;margin-left: 270px;margin-top: 83px;}
+.detail_info{flex: 1 1 auto;overflow-y: auto;margin-left: 270px;}
 .detail_info > h1, .detail_info > h4{font-family: Copernicus,'Libre Baskerville',Georgia,serif;}
 
 .reviews-user-img{border-radius: 50%}
@@ -52,7 +47,14 @@
 .fixed-image > h3 {margin-top: 30px;}
 
 .detail-description{margin-right: 200px}
+
+.detail-review-created{float: right}
 /*end styles detali page*/
+
+
+/*profile page*/
+.review-user-image{width: 60px; height: 60px; border-radius: 50%}
+.rounded-circle{border: #3b2514 !important;}
 
 .card {
     position: relative;

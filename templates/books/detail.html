@@ -1,50 +1,8 @@
-{#{% extends 'base.html' %}#}
-{##}
-{#{% block title %} {{ book_detail.title }} {% endblock %}#}
-{##}
-{#{% block content %}#}
-
-{#    <div class="row mt-3 detail_item">#}
-{#        <div class="col-3">#}
-{#            <img class="book_image" src="{{ book_detail.book_image.url }}" alt="">#}
-{#        </div>#}
-{##}
-{#        <div class="col-9 detail_desc">#}
-{#            <h1>{{ book_detail.name }}</h1>#}
-{#            {% for author in book_author %}#}
-{#                <h4>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</h4>#}
-{#            {% endfor %}#}
-{#            <p class="text-muted" style="margin-right: 140px;">{{ book_detail.description }}</p>#}
-{#            <p>ISBN: {{ book_detail.isbn }}</p>#}
-{##}
-{##}
-{#            {% for review in reviews %}#}
-{#                <div class="row">#}
-{#                    <div class="col-1 ms-2">#}
-{#                        <img class="review-user-image" src="{{ review.user.profile_img.url }}" alt="">#}
-{#                        <p class="mt-2" style="font-size: 12px">{{ review.user.first_name }}</p>#}
-{#                    </div>#}
-{#                    <div class="col-10 ms-4">#}
-{#                        <p>{{ review.stars }} stars rated<span style="float: right">{{ review.created_time | date:'M d, Y' }}</span></p>#}
-{#                        <p>{{ review.comment }}</p>#}
-{#                        <hr class="my-4">#}
-{#                    </div>#}
-{##}
-{##}
-{#                </div>#}
-{#            {% endfor %}#}
-{##}
-{#        </div>#}
-{#    </div>#}
-
-
-
 {% extends 'base.html' %}
 
 {% block title %} {{ book_detail.title }} {% endblock %}
 
 {% block content %}
-
 
 <div class="head-div">
   <div class="fixed-image">
@@ -62,9 +20,16 @@
           <div class="row mt-5">
               <div class="col-2">
                   <img class="review-user-image" width="80" height="80" src="{{ review.user.profile_img.url }}" alt="review user image">
-                  <p class="mt-2">{{ review.user.first_name }}</p>
+                  {% if review.user.first_name %}
+                      <p class="mt-2">{{ review.user.first_name }}</p>
+                  {% else %}
+                      <p class="mt-2">@{{ review.user.username }}</p>
+                  {% endif %}
               </div>
               <div class="col-9">
+                  <p>{{ review.stars }} stars rated <span class="detail-review-created">{{ review.created_time | date:'M d, Y' }}</span></p>
+
+
                   <p>{{ review.comment }}</p>
               </div>
           </div>
