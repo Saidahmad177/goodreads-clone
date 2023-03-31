@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %} Search Result {% endblock %}
+
+{% block content %}
+<div class="ms-5">
+        <div class="row">
+        <div class="col-7" style="background-color: #eeeeee;border-radius: 3px;">
+            <form class="d-flex p-4 pt-2" role="search" method="get" action="{% url 'search' %}">
+                <input style="margin-left: 5px" class="form-control me-1 search-panel" type="search" placeholder="Search books" aria-label="Search" value="{{ search_value }}" name="q">
+                <input class="me-2" type="submit" value="Search" style="border-radius: 3px;border: 1px solid #D6D0C4;font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif; font-size: 14px;">
+            </form>
+        </div>
+    </div>
+
+    {% if search_result %}
+        <h5 class="my-3">{{ result_count }} results for: <u><b>{{ search }}</b></u></h5>
+        {% for result in search_result %}
+        <div class="row mb-5">
+            <hr>
+            <div class="col-1">
+                <img width="80" height="110" src="{{ result.book_image.url }}" alt="">
+            </div>
+            <div class="col-7">
+                <h6><a href="{% url 'book:detail_view' result.slug %}">{{ result.name }}</a></h6>
+                {% for author in result.bookauthor_set.all %}
+                    <p>by <b>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</b></p>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+        <div class="row">
+            <div class="col-7">
+                <h2 class="mt-3">No result.</h2>
+                <hr class="mb-4">
+                Looking for a book?
+                <ul>
+                    <li>Search by both title and author, and double-check the spelling.</li>
+                    <li>Try searching by ISBN.</li>
+                </ul>
+            </div>
+        </div>
+
+
+    {% endif %}
+</div>
+
+
+{% endblock %}

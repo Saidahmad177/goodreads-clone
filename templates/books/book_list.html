@@ -3,14 +3,6 @@
 {% block title %} Books list {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-4">
-            <form class="d-flex mb-3 mt-2" method="get">
-                <input class="form-control" type="text" placeholder="Search" name="q" value="{{ search_value }}">
-                <button class="btn btn-secondary ms-1">Search</button>
-            </form>
-        </div>
-    </div>
     {% if books %}
         {% for book in books.object_list %}
             <div class="row mb-4">

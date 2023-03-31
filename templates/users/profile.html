@@ -3,23 +3,7 @@
 
 {% block title %} Profile {% endblock %}
 
-
-<style>
-    label {
-   cursor: pointer;
-   /* Style as you please, it will become the visible UI component. */
-    }
-
-    #upload-photo {
-       opacity: 0;
-       position: absolute;
-       z-index: -1;
-    }
-</style>
-
-
 {% block content %}
-
     <div class="main-body">
         <div class="row">
             <div class="col-lg-4">
@@ -32,6 +16,30 @@
                                 <p class="text-muted mb-1">@{{ user.username }}</p>
                                 <p class="text-muted">{{ user.email }}</p>
                                 <p class="text-muted">Joined: {{ user.date_joined | date:'M d, Y' }}</p>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                  Delete my account
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Account delete</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        ! Do you want to delete your account?
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, take me back</button>
+                                          <a href="{% url 'users:delete_profile' %}"><button type="button" class="btn btn-danger">Yes, I'm sure</button></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                             </div>
                         </div>
 
@@ -96,7 +104,6 @@
             </div>
         </div>
     </div>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/3a2eaf6206.js"></script>

@@ -7,6 +7,7 @@ from .forms import SignUpForm, ProfileUpdateForm
 from django.contrib import messages
 
 
+# User register view
 class SignUpView(View):
     def get(self, request):
         form = SignUpForm()
@@ -29,6 +30,7 @@ class SignUpView(View):
             return render(request, 'users/register.html', context)
 
 
+# User login View
 class LoginView(View):
     def get(self, request):
         form = AuthenticationForm()
@@ -47,6 +49,7 @@ class LoginView(View):
             return render(request, 'users/login.html', {'form': form})
 
 
+# User logout view
 class LogoutView(View):
     def get(self, request):
         logout(request)
@@ -54,6 +57,7 @@ class LogoutView(View):
         return redirect('home_page')
 
 
+# User profile View
 class ProfileView(LoginRequiredMixin, View):
     # def get(self, request):
     #     return render(request, 'users/profile.html', {'user': request.user})
@@ -71,3 +75,11 @@ class ProfileView(LoginRequiredMixin, View):
 
         return render(request, 'users/profile.html', {'form': form})
 
+
+# Delete account View
+class DeleteProfileView(View):
+
+    def get(self, reqeust):
+        reqeust.user.delete()
+        messages.info(reqeust, 'You are deleted account!')
+        return redirect('home_page')

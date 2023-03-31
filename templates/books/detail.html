@@ -37,6 +37,9 @@
   </div>
 </div>
 
+    {% for book in books %}
+        <p>{{ book.bookauthor_set.name }}</p>
+    {% endfor %}
 
 {% endblock %}
 

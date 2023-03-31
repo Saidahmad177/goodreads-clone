@@ -23,15 +23,19 @@
 .navbar_m > li > a{ margin-left: 10px; color: #3b2514;}
 .navbar_m > li > a:hover{ color: #9a9385;}
 
-
+.search-panel{margin-left: 100px}
+.search-panel-icon{border: none; margin-top: 4px; background: none}
 
 .nav_btn{background-color: #b9ad99; border: none}
 .nav_btn:hover{background-color: #9a9385}
 
 .nav_login:hover{color: #9a9385 !important}
+.nav-profile-img{border-radius: 50%;  width: 40px; height: 40px}
 
 /*end navigation bar*/
-
+/*Container*/
+.container-navbar{margin-top: 90px}
+/*end contatiner*/
 
 
 /*detail page styles*/
@@ -95,8 +99,6 @@
 .login_url{color: #393f81;}
 .login_image{border-radius: 1rem 0 0 1rem; width: 100%; height: 550px;}
 /*end login page*/
-
-
 
 
 @media screen and (max-width: 992px){
