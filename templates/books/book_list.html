@@ -3,19 +3,33 @@
 {% block title %} Books list {% endblock %}
 
 {% block content %}
+
     {% if books %}
-        {% for book in books.object_list %}
+        {% for book, rating, count in books %}
             <div class="row mb-4">
                 <div class="col-2">
                     <img class="books_list_image" src="{{ book.book_image.url }}" alt="">
                 </div>
                 <div class="col-6 book_list_item">
                     <h3><a href="{% url 'book:detail_view' book.slug %}">{{ book.name }}</a></h3>
+                    {% for author in book.bookauthor_set.all %}
+                        <p class="mt-2">by <b>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</b></p>
+                    {% endfor %}
                     <p class="mt-3">{{ book.description | truncatechars:240 }}</p>
+                    {% with rev=book.bookreview_set.all %}
+                           {% for i in range %}
+                              {% if rating > i %}
+                                  <label class="rating-star2"></label>
+                              {% else %}
+                                  <label class="rating-star"></label>
+                              {% endif %}
+                           {% endfor %}
+                                <span class="ms-2">{{ rev.count }} reviews</span>
+                    {% endwith %}
+
                 </div>
             </div>
         {% endfor %}
-
         <nav aria-label="Page navigation example">
           <ul class="pagination">
             {% if books.has_previous %}
@@ -39,7 +53,6 @@
             {% if books.has_next %}
                 <li class="page-item"><a class="page-link" href="?page={{ books.next_page_number }}">{{ books.next_page_number }}</a></li>
             {% endif %}
-
 
               {% if books.has_next %}
                 <li class="page-item">

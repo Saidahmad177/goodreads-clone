@@ -8,8 +8,20 @@
   <div class="fixed-image">
       <img class="px-3" width="220" height="300" src="{{ book_detail.book_image.url }}" alt="image">
       <h3>Review this book</h3>
+      <div class="rate form-group">
+        <input type="radio" id="star5" name="stars" value="5" />
+        <label for="star5" title="5 stars">5 stars</label>
+        <input type="radio" id="star4" name="stars" value="4" />
+        <label for="star4" title="4 stars">4 stars</label>
+        <input type="radio" id="star3" name="stars" value="3" />
+        <label for="star3" title="3 stars">3 stars</label>
+        <input type="radio" id="star2" name="stars" value="2" />
+        <label for="star2" title="2 stars">2 stars</label>
+        <input type="radio" id="star1" name="stars" value="1" />
+        <label for="star1" title="1 stars">1 star</label>
+      </div>
   </div>
-  <div class="detail_info">
+  <div class="detail_info" style="overflow-x: hidden">
       <h1>{{ book_detail.name }}</h1>
       {% for author in book_author %}
           <h4>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</h4>
@@ -17,9 +29,9 @@
         <p class="detail-description">{{ book_detail.description }}</p>
       <hr>
   <h4>Reviews</h4>
+  <p>{{ review_count }} comments for this book</p>
 
       <form method="post">{% csrf_token %}
-
           <div class="rate form-group">
             <input type="radio" id="star5" name="stars" value="5" />
             <label for="star5" title="5 stars">5 stars</label>
@@ -33,11 +45,10 @@
             <label for="star1" title="1 stars">1 star</label>
           </div>
           <div class="form-group col-9">
-              <label for="comment">Comment</label>
-              <textarea class="form-control" name="comment" id="comment" cols="2" rows="6"></textarea>
+                  <textarea class="form-control" name="comment" placeholder="Comment*" cols="2" rows="6"></textarea>
+
           </div>
           <input class="my-2" type="submit" style="padding: 4px 13px; border-radius: 3px; font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif; border: 1px solid #D6D0C4; background-color: #F4F1EA " value="Post">
-
       </form>
 
       {% for review in reviews %}
@@ -60,22 +71,15 @@
                               <label class="rating-star"></label>
                           {% endif %}
                       {% endfor %}
-                  <p class="detail-review-created">{{ review.created_time | date:'M d, Y' }}</p>
+                  <p class="detail-review-created mt-2">{{ review.created_time | date:'M d, Y' }}</p>
                       <hr>
                   </h6>
-
-{#<i class="fa-sharp fa-solid fa-star" style="color: #fbff0f;"></i>#}
-
                   <p>{{ review.comment }}</p>
               </div>
           </div>
       {% endfor %}
   </div>
 </div>
-
-    {% for book in books %}
-        <p>{{ book.bookauthor_set.name }}</p>
-    {% endfor %}
 
 {% endblock %}
 

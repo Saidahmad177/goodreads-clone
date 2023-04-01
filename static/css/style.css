@@ -84,6 +84,10 @@
     /* color: #deb217;   */
     color: #e87400;
 }
+.rating-star{font-size:30px;color:#ccc;}
+.rating-star:before{content: '★ ';}
+.rating-star2{font-size:30px;color:#e87400;}
+.rating-star2:before{content: '★ ';}
 
 /*end styles detail page*/
 
@@ -137,25 +141,4 @@
     .col-6{width: 550px}
     .book_list_item{margin-left: 40px;}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-.rating-star{font-size:30px;color:#ccc;}
-.rating-star:before{content: '★ ';}
-.rating-star2{font-size:30px;color:#e87400;}
-.rating-star2:before{content: '★ ';}
-
-
-
-
-
 
