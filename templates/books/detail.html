@@ -42,7 +42,7 @@
 
       {% for review in reviews %}
           <hr>
-          <div class="row mt-5">
+          <div class="row mt-4">
               <div class="col-2">
                   <img class="review-user-image" width="80" height="80" src="{{ review.user.profile_img.url }}" alt="review user image">
                   {% if review.user.first_name %}
@@ -52,21 +52,19 @@
                   {% endif %}
               </div>
               <div class="col-9">
-                  <h6 class="card-title mb-3">
+                  <h6 class="card-title mb-1">
                       {% for i in range %}
                           {% if review.stars > i %}
-                              <i class="fa-solid fa-star" style="color: #ffc700;"></i>
+                              <label class="rating-star2"></label>
                           {% else %}
-                              <span class="fa fa-star" style="color: #ccc"></span>
+                              <label class="rating-star"></label>
                           {% endif %}
                       {% endfor %}
-                      <span class="detail-review-created">{{ review.created_time | date:'M d, Y' }}</span>
+                  <p class="detail-review-created">{{ review.created_time | date:'M d, Y' }}</p>
+                      <hr>
                   </h6>
-              <div class="rate">
-                  <input type="radio" id="star1" name="stars" value="1" />
-                <label for="star1" title="1 stars">1 star</label>
-              </div>
 
+{#<i class="fa-sharp fa-solid fa-star" style="color: #fbff0f;"></i>#}
 
                   <p>{{ review.comment }}</p>
               </div>
