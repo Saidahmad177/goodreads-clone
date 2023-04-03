@@ -4,6 +4,10 @@ from django.views.generic import View
 from book.models import Book
 
 
+def landing_page(request):
+    return render(request, 'landing_page.html')
+
+
 def home_page(request):
     return render(request, 'home.html')
 

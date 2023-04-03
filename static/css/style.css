@@ -39,16 +39,20 @@
 
 
 /*detail page styles*/
-.head-div {display: flex;flex-wrap: nowrap;overflow-x: auto;}
-.fixed-image {flex: 0 0 auto;position: fixed;top: 90px;left: 90px;}
+.detail-button{border-radius: 3rem; width: 88%; border: 2px solid #409970 !important;}
+.detail-post-button{padding: 4px 13px; border-radius: 3px; font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif; border: 1px solid #D6D0C4; background-color: #F4F1EA }
+.detail-post-button:hover{color: #333333; background-color: #ede6d6;}
 
-.detail_info{flex: 1 1 auto;overflow-y: auto;margin-left: 270px;}
+.head-div {display: flex;flex-wrap: nowrap;}
+
+.detail_info{flex: 1 1 auto;overflow-y: auto;overflow-x: hidden; margin-left: 270px;}
 .detail_info > h1, .detail_info > h4{font-family: Copernicus,'Libre Baskerville',Georgia,serif;}
 
 .reviews-user-img{border-radius: 50%}
 
-.fixed-image > img {border-radius: 0 30px 30px 0}
-.fixed-image > h3 {margin-top: 30px;}
+.fixed-image {flex: 0 0 auto;position: fixed;top: 90px;left: 90px;}
+.fixed-image > img {margin-left: 6px; border-radius: 0 30px 30px 0;}
+.fixed-image > h3 {margin-top: 30px; font-family: Copernicus,'Libre Baskerville',Georgia,serif;}
 
 .detail-description{margin-right: 200px}
 

@@ -2,10 +2,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from .views import home_page, SearchView
+from .views import home_page, SearchView, landing_page
 
 urlpatterns = [
-    path('', home_page, name='home_page'),
+    path('', landing_page, name='landing_page'),
+    path('home/', home_page, name='home_page'),
     path('search/', SearchView.as_view(), name='search'),
     path('users/', include('users.urls')),
     path('books/', include('book.urls')),

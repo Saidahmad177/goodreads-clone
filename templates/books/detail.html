@@ -7,21 +7,15 @@
 <div class="head-div">
   <div class="fixed-image">
       <img class="px-3" width="220" height="300" src="{{ book_detail.book_image.url }}" alt="image">
-      <h3>Review this book</h3>
-      <div class="rate form-group">
-        <input type="radio" id="star5" name="stars" value="5" />
-        <label for="star5" title="5 stars">5 stars</label>
-        <input type="radio" id="star4" name="stars" value="4" />
-        <label for="star4" title="4 stars">4 stars</label>
-        <input type="radio" id="star3" name="stars" value="3" />
-        <label for="star3" title="3 stars">3 stars</label>
-        <input type="radio" id="star2" name="stars" value="2" />
-        <label for="star2" title="2 stars">2 stars</label>
-        <input type="radio" id="star1" name="stars" value="1" />
-        <label for="star1" title="1 stars">1 star</label>
-      </div>
+      <h5>
+          <button class="btn btn-success mt-3 mb-1 detail-button" disabled>Want to read</button>
+          <button class="btn my-2 detail-button" disabled>Buy on Amazon</button>
+      </h5>
+      <h3>Community Reviews</h3>
+      <h6>({{ review_count }}) reviews</h6>
+
   </div>
-  <div class="detail_info" style="overflow-x: hidden">
+  <div class="detail_info">
       <h1>{{ book_detail.name }}</h1>
       {% for author in book_author %}
           <h4>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</h4>
@@ -45,10 +39,9 @@
             <label for="star1" title="1 stars">1 star</label>
           </div>
           <div class="form-group col-9">
-                  <textarea class="form-control" name="comment" placeholder="Comment*" cols="2" rows="6"></textarea>
-
+              <textarea class="form-control" name="comment" placeholder="Comment*" cols="2" rows="6"></textarea>
           </div>
-          <input class="my-2" type="submit" style="padding: 4px 13px; border-radius: 3px; font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif; border: 1px solid #D6D0C4; background-color: #F4F1EA " value="Post">
+          <input class="my-2 detail-post-button" type="submit" value="Post">
       </form>
 
       {% for review in reviews %}
