@@ -8,12 +8,12 @@
         {% for book, rating, count in books %}
             <div class="row mb-4">
                 <div class="col-2">
-                    <img class="books_list_image" src="{{ book.book_image.url }}" alt="">
+                    <a href="{% url 'book:detail_view' book.slug %}"><img class="books_list_image" src="{{ book.book_image.url }}" alt="book image"></a>
                 </div>
                 <div class="col-7 book_list_item">
                     <h4><a href="{% url 'book:detail_view' book.slug %}">{{ book.name }}</a></h4>
                     {% for author in book.bookauthor_set.all %}
-                        <p class="mt-2">by <b>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</b></p>
+                        <p>by <b>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</b></p>
                     {% endfor %}
                     <p class="mt-3">{{ book.description | truncatechars:200 }}</p>
                     {% with rev=book.bookreview_set.all %}

@@ -12,6 +12,7 @@ class Book(models.Model):
     description = models.TextField()
     isbn = models.CharField(max_length=17)
     book_image = models.ImageField(upload_to='books/', default='default_book.jpg')
+    created_time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name

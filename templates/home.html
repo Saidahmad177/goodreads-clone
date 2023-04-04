@@ -3,5 +3,109 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-    <h1>Home page</h1>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            {% for review in books %}
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="media mb-3">
+                  <img src="{{ review.user.profile_img.url }}" class="d-block ui-w-40 rounded-circle" alt="">
+                <span class="text-muted small" style="float: right">{{ review.created_time | date:'M d, Y' }}</span>
+                  <div class="media-body ml-3">
+                      {% if review.user.first_name %}
+                          {{ review.user.first_name }} {{ review.user.last_name }}
+                      {% else %}
+                          @{{ review.user.username }}
+                      {% endif %}
+                  </div>
+                </div>
+                {% for i in range %}
+                    {% if review.stars > i %}
+                        <span class="rating-star2"></span>
+                    {% else %}
+                        <span class="rating-star"></span>
+                    {% endif %}
+                {% endfor %}
+
+                <p>
+                  {{ review.comment }}
+                </p>
+                  <div class="row">
+                      <div class="col-2">
+                          <a href="{% url 'book:detail_view' review.book_name.slug %}"><img src="{{ review.book_name.book_image.url }}" width="100" height="140" alt=""></a>
+
+                      </div>
+                      <div class="col-9">
+                          <h5><a href="{% url 'book:detail_view' review.book_name.slug %}">{{ review.book_name }}</a></h5>
+                          {% for author in review.book_name.bookauthor_set.all %}
+                              <h6>by <b>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</b></h6>
+                          {% endfor %}
+                          <p>{{ review.book_name.description | truncatechars:200 }}</p>
+                      </div>
+                  </div>
+
+              </div>
+            </div>
+            {% endfor %}
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                {% if books.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
+                    <li class="page-item">
+                    <a class="page-link" href="{% url 'book:books_list'  %}?page={{ books.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">-</span>
+                      </a>
+                    </li>
+                {% endif %}
+
+                {% if books.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ books.previous_page_number }}">{{ books.previous_page_number }}</a></li>
+                {% endif %}
+                <li class="page-item active" style="z-index: 0;"><a class="page-link" href="#">{{ books.number }}</a></li>
+                {% if books.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ books.next_page_number }}">{{ books.next_page_number }}</a></li>
+                {% endif %}
+
+                  {% if books.has_next %}
+                    <li class="page-item">
+                      <a class="page-link" href="{% url 'book:books_list' %}?page={{ books.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                      <li class="page-item"><a class="page-link" href="?page={{ books.paginator.num_pages }}">last</a></li>
+                  {% else %}
+                    <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">-</span>
+                      </a>
+                    </li>
+                  {% endif %}
+              </ul>
+            </nav>
+        </div>
+
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <h3 class="mb-3 last-books-text">Latest added Books</h3>
+            <hr>
+            {% for book in latest_books %}
+                <div class="row mb-5">
+                    <div class="col-3">
+                        <a href="{% url 'book:detail_view' book.slug %}"><img src="{{ book.book_image.url }}" width="80" height="120" alt="book image"></a>
+                    </div>
+                    <div class="col-9">
+                        <a href="{% url 'book:detail_view' book.slug %}"><h5>{{ book.name }}</h5></a>
+                        <p>{{ book.description | truncatechars:100 }}</p>
+                    </div>
+                </div>
+
+            {% endfor %}
+    </div>
+    </div>
+
 {% endblock %}

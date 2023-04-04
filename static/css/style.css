@@ -1,16 +1,21 @@
 * {
     margin: 0 0;
 }
+a {color: #333; text-decoration: none}
+a:hover {text-decoration: underline}
 
 /*book image*/
 .book_image{width: 240px; height: 340px; border-radius: 0 15px 15px 0}
 .books_list_image{width: 140px; height: 210px}
+.book_list_item > h4 > a, .book_list_item > p > b {color: #00635d; text-decoration: none}
+.book_list_item > h4 > a:hover, .book_list_item > p > b:hover {text-decoration: underline}
+
+.land-image{width: 100%; height: 400px }
 
 
 /*navigation bar*/
 .navbar_item3 {
     background-color: #F4F1EA !important;
-
     color: #3b2514;
     font-family: optima, sans-serif;
     position: fixed !important;
@@ -37,6 +42,14 @@
 .container-navbar{margin-top: 90px}
 /*end contatiner*/
 
+/*home page*/
+.ui-w-40 {width: 40px !important; height: auto;}
+
+.d-flex, .d-inline-flex, .media, .media>:not(.media-body), .jumbotron, .card {
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+}
+.last-books-text{font-size: 16px; text-transform: uppercase}
 
 /*detail page styles*/
 .detail-button{border-radius: 3rem; width: 88%; border: 2px solid #409970 !important;}
@@ -80,12 +93,10 @@
 .rate:not(:checked) > label:before {
     content: '★ ';
 }
-.rate > input:checked ~ label {
-    color: #e87400;
-}
+.rate > input:checked ~ label {color: #e87400;}
+
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-    /* color: #deb217;   */
     color: #e87400;
 }
 .rating-star{font-size:30px;color:#ccc;}
@@ -113,15 +124,12 @@
     margin-bottom: 1.5rem;
     box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
 }
-.me-2 {
-    margin-right: .5rem!important;
-}
+.me-2 {margin-right: .5rem!important;}
+
 .profile-change-btn{background-color: #b9ad99; border: none}
 .profile-change-btn:hover{background-color: #9a9385}
 
-.padd{
-    margin-top: 30px;
-}
+.padd{margin-top: 30px;}
 /*end profile page*/
 
 /*form control*/
