@@ -26,7 +26,7 @@ a:hover {text-decoration: underline}
 .goodreads_logo{width: 180px}
 
 .navbar_m > li > a{ margin-left: 10px; color: #3b2514;}
-.navbar_m > li > a:hover{ color: #9a9385;}
+.navbar_m > li > a:hover{text-decoration: none; color: #9a9385;}
 
 .search-panel{margin-left: 100px}
 .search-panel-icon{border: none; margin-top: 4px; background: none}

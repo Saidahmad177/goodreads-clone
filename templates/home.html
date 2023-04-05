@@ -28,7 +28,7 @@
                 {% endfor %}
 
                 <p>
-                  {{ review.comment }}
+                  {{ review.comment | truncatechars:280 }}
                 </p>
                   <div class="row">
                       <div class="col-2">
@@ -37,9 +37,17 @@
                       </div>
                       <div class="col-9">
                           <h5><a href="{% url 'book:detail_view' review.book_name.slug %}">{{ review.book_name }}</a></h5>
-                          {% for author in review.book_name.bookauthor_set.all %}
-                              <h6>by <b>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</b></h6>
-                          {% endfor %}
+                          <h6>
+                              by
+                              {% for author in review.book_name.bookauthor_set.all %}
+                                  <b>
+                                      {% if forloop.last %}
+                                          {{ author.author_id.full_name }}
+                                      {% else %}
+                                         {{ author.author_id.full_name }},
+                                      {% endif %}
+                                  </b>
+                              {% endfor %}</h6>
                           <p>{{ review.book_name.description | truncatechars:200 }}</p>
                       </div>
                   </div>

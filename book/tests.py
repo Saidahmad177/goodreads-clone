@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from users.models import CustomUser
-from .models import Book
+from .models import Book, Author, BookAuthor
 
 
 class BooksTestCase(TestCase):
@@ -36,16 +36,24 @@ class BooksTestCase(TestCase):
         response = self.client.get(reverse('book:books_list') + '?page=2&page_size=2')
         self.assertContains(response, book3.name)
 
-    def test_detail_page(self):
+    def test_detail_view(self):
         self.client.login(username='testuser', password='testpassword')
-
-        book = Book.objects.create(name='title1', slug='test-slug', description='description1', isbn='isbn1')
-
+        author = Author.objects.create(first_name='John', last_name='Doe')
+        author2 = Author.objects.create(first_name='Charl', last_name='Karl')
+        book = Book.objects.create(name='Sea Change',
+                                   slug='sea-change',
+                                   isbn='978363636212',
+                                   description='It is very good book'
+                                   )
+        BookAuthor.objects.create(book_id=book, author_id=author)
         response = self.client.get(reverse('book:detail_view', kwargs={'slug': book.slug}))
-
         self.assertContains(response, book.name)
         self.assertContains(response, book.description)
-        # self.assertContains(response, book.isbn)
+        self.assertNotContains(response, author2.first_name)
+        self.assertNotContains(response, author2.last_name)
+
+        for i in book.bookauthor_set.all():
+            self.assertContains(response, i.author_id.full_name())
 
     def test_review_book(self):
         user = CustomUser.objects.create(

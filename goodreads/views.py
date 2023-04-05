@@ -18,6 +18,9 @@ def home_page(request):
     page_num = request.GET.get('page', 1)
     pagination = paginator.get_page(page_num)
 
+    # for i in book_review:
+    #     print(i, '-----------------')
+
     context = {
         'latest_books': book[:10],
         'books': pagination,

@@ -17,9 +17,13 @@
   </div>
   <div class="detail_info">
       <h1>{{ book_detail.name }}</h1>
-      {% for author in book_author %}
-          <h4>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</h4>
-      {% endfor %}
+      <h4>{% for author in book_detail.bookauthor_set.all %}
+          {% if forloop.last %}
+              {{ author.author_id.full_name }}
+          {% else %}
+              {{ author.author_id.full_name }},
+          {% endif %}
+      {% endfor %}</h4>
         <p class="detail-description">{{ book_detail.description }}</p>
       <hr>
   <h4>Reviews</h4>
