@@ -60,7 +60,7 @@ class BooksTestCase(TestCase):
             username='testuser2',
             first_name='testname',
             last_name='testname',
-            email='test2@mail.ru'
+            email='test@mail.ru'
 
         )
         user.set_password('testpassword')

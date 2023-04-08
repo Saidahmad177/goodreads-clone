@@ -10,16 +10,13 @@ def landing_page(request):
 
 
 def home_page(request):
-    book = Book.objects.all().order_by('-created_time')
+    book = Book.objects.all().order_by('-id')
     book_review = BookReview.objects.all().order_by('-created_time')
 
     page_size = request.GET.get('page_size', 5)
     paginator = Paginator(book_review, page_size)
     page_num = request.GET.get('page', 1)
     pagination = paginator.get_page(page_num)
-
-    # for i in book_review:
-    #     print(i, '-----------------')
 
     context = {
         'latest_books': book[:10],

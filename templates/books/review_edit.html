@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="ms-5">
+        <div class="row">
+        <div class="col-1">
+            <img src="{{ book.book_image.url }}" width="80" height="120" alt="">
+        </div>
+        <div class="col-7">
+            <h3>{{ book.name }}</h3>
+            <h5>by
+                {% for author in book.bookauthor_set.all %}
+                    <b>
+                      {% if forloop.last %}
+                          {{ author.author_id.full_name }}
+                      {% else %}
+                          {{ author.author_id.full_name }},
+                      {% endif %}
+                    </b>
+                {% endfor %}
+            </h5>
+            <h6>My rating:
+                {% for star in range %}
+                    {% if review.stars > star %}
+                        <span class="rating-star2"></span>
+                    {% else %}
+                        <span class="rating-star"></span>
+                    {% endif %}
+                {% endfor %}
+            </h6>
+        </div>
+    </div>
+
+    <form method="post">{% csrf_token %}
+        <div class="rate form-group">
+            <input type="radio" id="star5" name="stars" value="5" />
+            <label for="star5" title="5 stars">5 stars</label>
+            <input type="radio" id="star4" name="stars" value="4" />
+            <label for="star4" title="4 stars">4 stars</label>
+            <input type="radio" id="star3" name="stars" value="3" />
+            <label for="star3" title="3 stars">3 stars</label>
+            <input type="radio" id="star2" name="stars" value="2" />
+            <label for="star2" title="2 stars">2 stars</label>
+            <input type="radio" id="star1" name="stars" value="1" />
+            <label for="star1" title="1 stars">1 star</label>
+          </div>
+
+        <div class="form-group col-8">
+              <textarea class="form-control" name="comment" placeholder="Enter your review(optional)" cols="10" rows="10">{{ review.comment }}</textarea>
+          </div>
+          <input class="my-2 detail-post-button" type="submit" value="Save">
+    </form>
+    </div>
+
+{% endblock %}

@@ -23,9 +23,18 @@
             </div>
             <div class="col-7">
                 <h6><a href="{% url 'book:detail_view' result.slug %}">{{ result.name }}</a></h6>
-                {% for author in result.bookauthor_set.all %}
-                    <p>by <b>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</b></p>
+                <p> by
+                    {% for author in result.bookauthor_set.all %}
+
+                        <b>
+                            {% if forloop.last %}
+                                {{ author.author_id.full_name }}
+                            {% else %}
+                                {{ author.author_id.full_name }},
+                            {% endif %}
+                        </b>
                 {% endfor %}
+                </p>
 
             </div>
         </div>

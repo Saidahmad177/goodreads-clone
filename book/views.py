@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Count
@@ -10,7 +11,7 @@ from .forms import BookReviewForm
 
 class BooksListView(View):
     def get(self, request):
-        books_data = Book.objects.all().order_by('id')
+        books_data = Book.objects.all().order_by('-id')
         book_ratings = []
 
         for book in books_data:
@@ -37,7 +38,6 @@ class BooksListView(View):
 class DetailView(LoginRequiredMixin, View):
     def get(self, request, slug):
         book = get_object_or_404(Book, slug=slug)
-
         reviews = BookReview.objects.filter(book_name=book)
         author_book = book.bookauthor_set.all()
         review_count = reviews.count()
@@ -65,3 +65,41 @@ class DetailView(LoginRequiredMixin, View):
             )
         return redirect(reverse('book:detail_view', kwargs={'slug': slug}))
 
+
+class DeleteReview(View):
+    def get(self, request, slug, review_id):
+        book = get_object_or_404(Book, slug=slug)
+        review = book.bookreview_set.get(id=review_id)
+        review.delete()
+
+        return redirect(reverse('book:detail_view', kwargs={'slug': slug}))
+
+
+class EditReview(View):
+    def get(self, request, slug, review_id):
+        book = Book.objects.get(slug=slug)
+        review = book.bookreview_set.get(id=review_id)
+        context = {
+            'review': review,
+            'book': book,
+            'range': range(5)
+
+        }
+
+        return render(request, 'books/review_edit.html', context)
+
+    def post(self, request, slug, review_id):
+        book = Book.objects.get(slug=slug)
+        review = book.bookreview_set.get(id=review_id)
+        form = BookReviewForm(instance=review, data=request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('book:detail_view', kwargs={'slug': book.slug}))
+
+        context = {
+            'book': book,
+            'review': review,
+        }
+
+        return render(request, 'books/review_edit.html', context)

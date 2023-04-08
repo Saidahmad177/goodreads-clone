@@ -1,4 +1,6 @@
 from django import forms
+from django.core.mail import send_mail
+
 from users.models import CustomUser
 
 
@@ -11,6 +13,14 @@ class SignUpForm(forms.ModelForm):
         user = super().save(commit)
         user.set_password(self.cleaned_data['password'])
         user.save()
+
+        # if user.email:
+        #     send_mail(
+        #         'Goodreads',
+        #         f"Hi {user.username}, Welcome to Goodreads",
+        #         'djangosend@mail.ru',
+        #         [user.email]
+        #     )
 
         return user
 

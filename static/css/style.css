@@ -33,8 +33,9 @@ a:hover {text-decoration: underline}
 
 .nav_btn{background-color: #b9ad99; border: none}
 .nav_btn:hover{background-color: #9a9385}
+.nav_btn>a:hover{text-decoration: none}
 
-.nav_login:hover{color: #9a9385 !important}
+.nav_login:hover{color: #9a9385 !important; text-decoration: none}
 .nav-profile-img{border-radius: 50%;  width: 40px; height: 40px}
 
 /*end navigation bar*/
