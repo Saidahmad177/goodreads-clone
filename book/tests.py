@@ -125,5 +125,3 @@ class BooksTestCase(TestCase):
         self.assertNotContains(response, book1.name)
         self.assertNotContains(response, book2.name)
 
-
-
