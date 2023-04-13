@@ -38,7 +38,7 @@ class BooksListView(View):
 class DetailView(LoginRequiredMixin, View):
     def get(self, request, slug):
         book = get_object_or_404(Book, slug=slug)
-        reviews = BookReview.objects.filter(book_name=book)
+        reviews = BookReview.objects.filter(book_name=book).order_by('id')
         author_book = book.bookauthor_set.all()
         review_count = reviews.count()
         context = {

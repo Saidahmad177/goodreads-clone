@@ -77,7 +77,7 @@
                 {% if books.has_previous %}
                     <li class="page-item"><a class="page-link" href="?page={{ books.previous_page_number }}">{{ books.previous_page_number }}</a></li>
                 {% endif %}
-                <li class="page-item active" style="z-index: 0;"><a class="page-link" href="#">{{ books.number }}</a></li>
+                <li class="page-item active" style="z-index: 0;"><a class="page-link">{{ books.number }}</a></li>
                 {% if books.has_next %}
                     <li class="page-item"><a class="page-link" href="?page={{ books.next_page_number }}">{{ books.next_page_number }}</a></li>
                 {% endif %}

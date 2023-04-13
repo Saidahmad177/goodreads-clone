@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from users.models import CustomUser
-from .models import Book, Author, BookAuthor
+from .models import Book, Author, BookAuthor, BookReview
 
 
 class BooksTestCase(TestCase):
@@ -23,18 +23,18 @@ class BooksTestCase(TestCase):
         self.assertContains(response, 'No books data.')
 
     def test_books_list(self):
-        book1 = Book.objects.create(name='title1', slug='test-slug', description='description1', isbn='isbn1')
-        book2 = Book.objects.create(name='title2', slug='test-slug', description='description2', isbn='isbn2')
-        book3 = Book.objects.create(name='title3', slug='test-slug', description='description3', isbn='isbn3')
+        book1 = Book.objects.create(name='title1', slug='title1', description='description1', isbn='111111')
+        book2 = Book.objects.create(name='Shoe Dog', slug='shoe-dog', description='description2', isbn='222222')
+        book3 = Book.objects.create(name='Sea Change', slug='sea-change', description='description3', isbn='333333')
 
         response = self.client.get(reverse('book:books_list') + '?page_size=2')
 
-        for book in [book1, book2]:
+        for book in [book3, book2]:
             self.assertContains(response, book.name)
-        self.assertNotContains(response, book3.name)
+        self.assertNotContains(response, book1.name)
 
         response = self.client.get(reverse('book:books_list') + '?page=2&page_size=2')
-        self.assertContains(response, book3.name)
+        self.assertContains(response, book1.name)
 
     def test_detail_view(self):
         self.client.login(username='testuser', password='testpassword')
@@ -124,4 +124,40 @@ class BooksTestCase(TestCase):
         self.assertContains(response, book3.name)
         self.assertNotContains(response, book1.name)
         self.assertNotContains(response, book2.name)
+
+
+class ReviewEditTestCase(TestCase):
+    def test_edit_review(self):
+        user = CustomUser.objects.create(
+            username='testuser',
+            email='test@mail.ru',
+        )
+        user.set_password('testpassword')
+        user.save()
+
+        book = Book.objects.create(
+            name='Sea change',
+            slug='sea-change',
+            description='sea is a good',
+            isbn='111111'
+        )
+        review = BookReview.objects.create(
+            book_name=book,
+            user=user,
+            stars=4,
+            comment='some comment'
+        )
+        self.client.login(username='testuser', password='testpassword')
+
+        response = self.client.get(reverse('book:edit-review', kwargs={'slug': book.slug, 'review_id': review.id}))
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post(reverse('book:edit-review', kwargs={'slug': book.slug, 'review_id': review.id}),
+                                    data={'stars': 1, 'comment': 'this is very good book'})
+        self.assertRedirects(response, reverse('book:detail_view', kwargs={'slug': book.slug}))
+        self.assertEqual(response.status_code, 302)
+
+        review.refresh_from_db()
+        self.assertEqual(review.stars, 1)
+        self.assertEqual(review.comment, 'this is very good book')
 
