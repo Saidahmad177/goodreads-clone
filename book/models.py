@@ -3,7 +3,6 @@ from django.utils import timezone
 
 from users.models import CustomUser
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.utils.text import slugify
 
 
 class Book(models.Model):

@@ -1,5 +1,6 @@
 import environ
 import os
+from dj_database_url import parse
 
 from pathlib import Path
 
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,14 +86,15 @@ WSGI_APPLICATION = 'goodreads.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'HOST': env('DB_HOST'),
-        'PORT': '5432',
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-    }
+    'default': parse(env('DATABASE_URL'))
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': env('DB_NAME'),
+    #     'HOST': env('DB_HOST'),
+    #     'PORT': '5432',
+    #     'USER': env('DB_USER'),
+    #     'PASSWORD': env('DB_PASSWORD'),
+    # }
 }
 
 
@@ -131,12 +134,13 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media-files'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
