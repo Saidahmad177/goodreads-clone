@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ book_detail.name }} {% endblock %}
+
+{% block content %}
+
+<div class="head-div">
+  <div class="fixed-author-image">
+      <img class="px-3" width="250" height="330" src="{{ author.author_img.url }}" alt="image">
+
+      <h3 class="my-4">{{ author.full_name }}</h3>
+      <h6>There are {{ author.bookauthor_set.all.count }} books for this author</h6>
+
+
+  </div>
+  <div class="detail_info">
+      <h1>{{ author.full_name }}</h1>
+      <hr>
+      <div class="row">
+          <div class="col-3">
+              <p class="mb-2"><b>Social network or Mail: </b></p>
+              <p><b>Member Since: </b></p>
+          </div>
+          <div class="col-3">
+              <p class="mb-2">{{ author.social_network }}</p>
+              <p>{{ author.member_since }}</p>
+          </div>
+      </div>
+        <p class="detail-description">{{ author.bio }}</p>
+      <h5>{{ author.full_name|upper }}'S BOOKS</h5>
+      <hr>
+
+      <div class="row my-3">
+          {% for author_book in author.bookauthor_set.all %}
+              <div class="col-1 my-2">
+                  <img src="{{ author_book.book_id.book_image.url }}" alt="author book" width="80" height="100">
+              </div>
+              <div class="col-10 ms-3 my-2">
+                  <h6><a href="{% url 'book:detail_view' author_book.book_id.slug %}">{{ author_book.book_id.name }}</a></h6>
+                  <h6>by <a href="{% url 'author:author-detail-page' author.id %}"><b>{{ author.full_name }}</b></a></h6>
+                  <p>{{ author_book.book_id.description|truncatechars:160 }}</p>
+              </div>
+          {% endfor %}
+      </div>
+
+  </div>
+</div>
+
+{% endblock %}
+

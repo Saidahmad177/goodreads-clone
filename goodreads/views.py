@@ -1,21 +1,29 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import View
 from book.models import Book, BookReview
 
 
 def landing_page(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('home_page'))
+
     return render(request, 'landing_page.html')
+
+
+def page_404(request):
+    return render(request, '404-page.html')
 
 
 def home_page(request):
     book = Book.objects.all().order_by('-id')
-    book_review = BookReview.objects.all().order_by('-created_time')
+    book_review = BookReview.objects.all().order_by('-id')
 
     page_size = request.GET.get('page_size', 5)
     paginator = Paginator(book_review, page_size)
-    page_num = request.GET.get('page', 1)
+    page_num = request.GET.get('page')
     pagination = paginator.get_page(page_num)
 
     context = {

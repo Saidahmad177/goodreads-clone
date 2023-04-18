@@ -20,8 +20,10 @@ class Book(models.Model):
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField()
+    social_network = models.CharField(max_length=100)
     bio = models.TextField()
+    member_since = models.CharField(max_length=50)
+    author_img = models.ImageField(upload_to='authors/', default='default_pic.jpg')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

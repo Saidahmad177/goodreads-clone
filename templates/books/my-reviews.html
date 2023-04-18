@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <h3>My reviews</h3>
+    {% if my_reviews %}
+        {% for review in my_reviews %}
+        <hr>
+        <div>
+            {% for i in range %}
+                {% if review.stars > i %}
+                    <i class="fa-solid fa-star" style="color: #f0d83d;"></i>
+                {% else %}
+                    <i class="fa-solid fa-star" style="color: #ccc"></i>
+                {% endif %}
+
+            {% endfor %}
+        <span style="float: right">{{ review.created_time|date:'M d, Y' }}
+            <a href="{% url 'book:edit-my-review' review.id %}">
+                <i class="bi bi-pencil-square"></i></a> |
+            <button type="button" data-bs-toggle="modal" data-bs-target="#delete-review-modal-{{ review.id }}" style="border: none; background-color: #fff">
+              <i class="bi bi-trash"></i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="delete-review-modal-{{ review.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete review</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to delete this comment?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, I'm not</button>
+                      <a href="{% url 'book:delete-my-review' review.id %}"><button type="submit" class="btn btn-primary">Yes, I'm sure</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </span>
+
+        <p class="my-3">{{ review.comment }}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-1">
+                <img src="{{ review.book_name.book_image.url }}" width="100" height="130" alt="my-review book image">
+            </div>
+            <div class="ms-3 col-5">
+                <h4><a href="{% url 'book:detail_view' review.book_name.slug %}">{{ review.book_name.name }}</a></h4>
+                <p>by
+                    {% for author in review.book_name.bookauthor_set.all %}
+                        <b><a href="{% url 'author:author-detail-page' author.author_id.id %}">
+                            {% if forloop.last %}
+                              {{ author.author_id.full_name }}
+                            {% else %}
+                               {{ author.author_id.full_name }},
+                            {% endif %}
+                        </a></b>
+                    {% endfor %}
+                </p>
+                <p>{{ review.book_name.description|truncatechars:100 }}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% else %}
+        <hr>
+        <h5>No Reviews for this user</h5>
+
+    {% endif %}
+
+{% endblock %}

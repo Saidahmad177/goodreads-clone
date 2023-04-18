@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ book_detail.title }} {% endblock %}
+{% block title %} {{ book_detail.name }} {% endblock %}
 
 {% block content %}
 
@@ -18,13 +18,16 @@
   <div class="detail_info">
       <h1>{{ book_detail.name }}</h1>
       <h4>{% for author in book_detail.bookauthor_set.all %}
-          {% if forloop.last %}
-              {{ author.author_id.full_name }}
-          {% else %}
-              {{ author.author_id.full_name }},
-          {% endif %}
+          <a href="{% url 'author:author-detail-page' author.author_id.id %}">
+              {% if forloop.last %}
+                  {{ author.author_id.full_name }}
+              {% else %}
+                  {{ author.author_id.full_name }},
+              {% endif %}
+          </a>
       {% endfor %}</h4>
         <p class="detail-description">{{ book_detail.description }}</p>
+      <p><b>ISBN: </b>{{ book_detail.isbn }}</p>
       <hr>
   <h4>Reviews</h4>
   <p>{{ review_count }} comments for this book</p>
@@ -52,12 +55,13 @@
           <hr>
           <div class="row mt-4">
               <div class="col-2">
+                  <a href="{% url 'users:user-detail' review.user.id review.user.username %}">
                   <img class="review-user-image" width="80" height="80" src="{{ review.user.profile_img.url }}" alt="review user image">
                   {% if review.user.first_name %}
                       <p class="mt-2">{{ review.user.first_name }}</p>
                   {% else %}
                       <p class="mt-2">@{{ review.user.username }}</p>
-                  {% endif %}
+                  {% endif %}</a>
               </div>
               <div class="col-9">
                   <h6 class="card-title mb-1">

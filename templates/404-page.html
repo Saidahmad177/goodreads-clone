@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Oops. Not found {% endblock %}
+
+{% block content %}
+
+    <img class="" src="{% static 'images/404-page.jpg' %}" alt=""
+         style="width: 100%; top: 0">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+
+        <h2 class="my-3">Oops, page not found</h2>
+        <p>Sorry, but the requested page is not found.</p>
+        <a href="/">
+            <button class="detail-post-button mt-5">
+                Back to the Goodreads homepage
+            </button>
+        </a>
+    </div>
+
+{% endblock %}

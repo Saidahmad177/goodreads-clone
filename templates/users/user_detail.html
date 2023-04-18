@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %} user id {% endblock %}
+
+{% block content %}
+
+    <div class="row ms-5">
+        <div class="col-3">
+            <img class="rounded-circle ms-3 mb-4" src="{{ user_detail.profile_img.url }}" width="160" height="180" alt="">
+            <button class="detail-post-button">{{ follower.count }} Followers</button>
+            <button class="detail-post-button">{{ following.count }} Following</button>
+        </div>
+        <div class="col-5">
+            <h3 style="font-family: 'Merriweather', Georgia, 'Times New Roman', serif;">{{ user_detail.full_name }}</h3>
+            <hr>
+            {% if request.user == user_detail %}
+                <a href="{% url 'users:profile' %}"><button class="detail-post-button mb-4">Edit Profile</button></a>
+            {% else %}
+                {% if is_following %}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="friend-btn mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      UnFollow
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Unfollow {{ user_detail.username }}?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            this will remove {{ user_detail.username }} from your friends
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="detail-post-button me-3" data-bs-dismiss="modal">Cancel</button>
+                            <a href="{% url 'friends:delete-friend' user_detail.id user_detail.username %}">
+                            <button type="button" class="follow-btn py-1 px-3">Confirm</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                {% elif pending %}
+                    <button class="friend-btn mb-4 ">Pending</button>
+
+                {% else %}
+                    <a href="{% url 'friends:send-friend-request' user_detail.id %}">
+                    <button class="follow-btn mb-4">Follow</button></a>
+
+                {% endif %}
+
+
+            {% endif %}
+            {% if is_follower %}
+                <a class="ms-4">THIS IS YOU FOLLOWER</a>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-4">
+                    <p><b>Username: </b></p>
+                    <p><b>Email: </b></p>
+                    <p><b>Joined: </b></p>
+                </div>
+                <div class="col-8">
+
+                    <p>@{{ user_detail.username }}</p>
+                    <p>{{ user_detail.email }}</p>
+                    <p>{{ user_detail.date_joined|date:'M d, Y' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="mt-2">
+        {% if follower or following %}
+            {% if follower %}
+                <h3 class="mb-4 mt-5">Followers</h3>
+                {% for follower in follower %}
+                    <div class="row mb-3">
+                        <div class="col-1">
+                            <img src="{{ follower.requester.profile_img.url }}" width="80" height="100" alt="">
+                        </div>
+                        <div class="col-8">
+                            <a href="{% url 'users:user-detail' follower.requester.id follower.requester.username %}">
+                            <h5>{{ follower.requester.full_name }}</h5>
+                            <p>@{{ follower.requester.username }}</p></a>
+                            <p>{{ follower.requester.date_joined|date:'M d, Y' }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <hr>
+            {% endif %}
+
+    {% if following %}
+        <h3 class="mb-4 mt-5">Following</h3>
+        {% for follow in following %}
+            <div class="row mb-3">
+                <div class="col-1">
+                    <img src="{{ follow.recipient.profile_img.url }}" width="80" height="100" alt="">
+                </div>
+                <div class="col-8">
+                    <a href="{% url 'users:user-detail' follow.recipient.id follow.recipient.username %}">
+                    <h5>{{ follow.recipient.full_name }}</h5>
+                    <p>@{{ follow.recipient.username }}</p></a>
+                    <p>{{ follow.recipient.date_joined|date:'M d, Y' }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    {% endif %}
+    {% else %}
+        <h3>No Friends.</h3>
+    {% endif %}
+    </div>
+
+{% endblock %}

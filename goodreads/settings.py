@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'book',
     'users',
     'api',
+    'author',
+    'friend',
 
     # external packages
     'rest_framework'

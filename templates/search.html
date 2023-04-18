@@ -26,15 +26,16 @@
                 <p> by
                     {% for author in result.bookauthor_set.all %}
 
-                        <b>
+                        <b><a href="{% url 'author:author-detail-page' author.author_id.id %}">
                             {% if forloop.last %}
                                 {{ author.author_id.full_name }}
                             {% else %}
                                 {{ author.author_id.full_name }},
                             {% endif %}
-                        </b>
+                        </a></b>
                 {% endfor %}
                 </p>
+                <p>{{ result.description|truncatechars:100 }}</p>
 
             </div>
         </div>

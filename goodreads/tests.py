@@ -25,9 +25,6 @@ class HomePageTestCase(TestCase):
 
         response = self.client.get(reverse('home_page') + '?page_size=2')
 
-        # for review in [review3, review2]:
-        #     self.assertContains(response, review.comment)
-
         self.assertContains(response, review3.comment)
         self.assertContains(response, review2.comment)
 
