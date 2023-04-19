@@ -14,7 +14,7 @@ def landing_page(request):
 
 
 def page_404(request):
-    return render(request, '404-page.html')
+    return render(request, '404.html')
 
 
 def home_page(request):

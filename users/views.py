@@ -15,6 +15,8 @@ from .models import CustomUser, Contact
 # User register view
 class SignUpView(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect(reverse('not-found'))
         form = SignUpForm()
         context = {
             'form': form,
@@ -43,6 +45,9 @@ class SignUpView(View):
 # User login View
 class LoginView(View):
     def get(self, request):
+
+        if request.user.is_authenticated:
+            return redirect(reverse('not-found'))
         form = AuthenticationForm()
         return render(request, 'users/login.html', {'form': form})
 
@@ -63,9 +68,12 @@ class LoginView(View):
 # User logout view
 class LogoutView(View):
     def get(self, request):
-        logout(request)
-        messages.info(request, 'You have logged out')
-        return redirect('home_page')
+        if request.user.is_authenticated:
+            logout(request)
+            messages.info(request, 'You have logged out')
+            return redirect('home_page')
+
+        return redirect(reverse('not-found'))
 
 
 # User profile View
