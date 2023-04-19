@@ -85,7 +85,7 @@ a:hover {text-decoration: underline}
 
 .detail-description{margin-right: 200px}
 
-.fixed-author-image {flex: 0 0 auto;position: fixed;top: 90px;left: 90px;}
+.fixed-author-image {flex: 0 0 auto;position: sticky;top: 90px;left: 90px;}
 .fixed-author-image img {margin-left: 6px;}
 
 .detail-review-created{float: right}

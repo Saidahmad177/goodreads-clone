@@ -88,15 +88,15 @@ WSGI_APPLICATION = 'goodreads.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': parse(env('DATABASE_URL'))
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': env('DB_NAME'),
-    #     'HOST': env('DB_HOST'),
-    #     'PORT': '5432',
-    #     'USER': env('DB_USER'),
-    #     'PASSWORD': env('DB_PASSWORD'),
-    # }
+    # 'default': parse(env('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_NAME'),
+        'HOST': env('DB_HOST'),
+        'PORT': '5432',
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+    }
 }
 
 
@@ -142,7 +142,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
