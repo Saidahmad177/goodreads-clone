@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Contact Us | Goodreads{% endblock %}
+
+{% block content %}
+
+    <h3 class="mb-4">Contact Us</h3>
+
+    <div class="row">
+        <div class="col-7">
+            <form method="post">{% csrf_token %}
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control" name="name" placeholder="Name*"/>
+
+                  </div>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control" name="email" placeholder="Email*"/>
+
+                  </div>
+                <div class="form-outline mb-4">
+                    <textarea class="form-control" name="message" id="" cols="30" rows="8" placeholder="Message*"></textarea>
+
+                  </div>
+                <button type="submit" class="detail-post-button">Send</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

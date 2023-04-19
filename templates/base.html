@@ -55,6 +55,7 @@
                     <li class="m-2"><a href="{% url 'users:profile' %}">Profile</a></li>
                     <li class="m-2"><a href="{% url 'friends:friends' %}">Friends</a></li>
                     <li class="m-2"><a href="{% url 'book:my-reviews' %}">My Reviews</a></li>
+                    <li class="m-2"><a href="{% url 'users:contact' %}">Contact</a></li>
                     <li class="m-2"><hr class="my-0"></li>
                     <li class="m-2"><a href="{% url 'users:logout' %}">Logout</a></li>
                   </ul>
@@ -69,8 +70,9 @@
 <div class="container container-navbar">
     {% if messages %}
         {% for message in messages %}
-            <div class="mb-4 alert alert-{{ message.tags }}">
-                {{ message }}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         {% endfor %}
     {% endif %}
@@ -79,6 +81,123 @@
         {% endblock %}
 
 </div>
+
+ <!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="mt-5">
+  <!-- Footer -->
+  <footer
+          class="text-center text-lg-start text-white"
+          style="background-color: #f4f1ea"
+          >
+    <!-- Grid container -->
+    <div class="p-4" style=" color: #3b2514;">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row ms-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">
+              Company
+            </h6>
+                  <p class="my-1"><a class="">About us</a></p>
+                  <p class="my-1"><a class="">Careers</a></p>
+                  <p class="my-1"><a class="">Terms</a></p>
+                  <p class="my-1"><a class="">Privacy</a></p>
+                  <p class="my-1"><a class="">Interest Based Ads</a></p>
+                  <p class="my-1"><a class="">Ad Preferences</a></p>
+                  <p class="my-1"><a class="">Help</a></p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">WORK WITH US</h6>
+            <p class="my-1">
+              <a class="">Authors</a>
+            </p>
+            <p class="my-1">
+              <a class="">Advertise</a>
+            </p>
+            <p class="my-1">
+              <a class="">Authors & ads blog</a>
+            </p>
+            <p class="my-1">
+              <a class="">API</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+            <p><i class="fas fa-home mr-3"></i> San Francisco</p>
+            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> + 1 234 567 890</p>
+            <p><i class="fas fa-print mr-3"></i> + 1 234 567 890</p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">CONNECT</h6>
+
+            <!-- Facebook -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #3b5998; border: none"
+               href="https://www.facebook.com/Goodreads/"
+               role="button"
+               ><i class="fab fa-facebook-f"></i
+              ></a>
+
+            <!-- Twitter -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #55acee; border: none"
+               href="https://twitter.com/goodreads"
+               role="button"
+               ><i class="fab fa-twitter"></i
+              ></a>
+
+            <!-- Instagram -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #ac2bac; border: none"
+               href="https://www.instagram.com/goodreads/"
+               role="button"
+               ><i class="fab fa-instagram"></i
+              ></a>
+
+            <!-- Linkedin -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #0082ca"
+               href="https://www.linkedin.com/company/goodreads-com/"
+               role="button"
+               ><i class="fab fa-linkedin-in"></i
+              ></a>
+          </div>
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+
+  </footer>
+  <!-- Footer -->
+</div>
+<!-- End of .container -->
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>

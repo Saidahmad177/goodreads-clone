@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user
-from users.models import CustomUser
+from users.models import CustomUser, Contact
 from django.test import TestCase
 from django.urls import reverse
 
@@ -191,3 +191,42 @@ class ProfileTestCase(TestCase):
         self.assertEqual(user.last_name, 'testlast_name')
         self.assertEqual(user.email, 'test1@mail.ru')
         self.assertEqual(response.url, reverse('users:profile'))
+
+
+class ContactTestCase(TestCase):
+    def test_contact_page(self):
+        user = CustomUser.objects.create(
+            username='testuser',
+        )
+        user.set_password('testpassword')
+        user.save()
+        self.client.login(username='testuser', password='testpassword')
+        self.client.post(
+            reverse('users:contact'),
+            data={
+                'name': 'testuser',
+                'email': 'test@mail.ru',
+                'message': 'some message',
+            }
+        )
+        contact_message = Contact.objects.get(email='test@mail.ru')
+
+        self.assertEqual(contact_message.user, user.username)
+        self.assertEqual(contact_message.name, 'testuser')
+        self.assertEqual(contact_message.email, 'test@mail.ru')
+        self.assertEqual(contact_message.message, 'some message')
+
+        self.client.post(
+            reverse('users:contact'),
+            data={
+                'name': 'fine',
+                'email': 'fine@gmail.com',
+                'message': 'fine',
+            }
+        )
+        contact_message = Contact.objects.get(email='fine@gmail.com')
+
+        self.assertEqual(contact_message.user, user.username)
+        self.assertEqual(contact_message.name, 'fine')
+        self.assertEqual(contact_message.email, 'fine@gmail.com')
+        self.assertEqual(contact_message.message, 'fine')

@@ -1,11 +1,12 @@
 from django.urls import path
 from .views import BooksListView, DetailView, DeleteReview, EditReview, MyReviewsView, \
-    EditMyReview, delete_my_review
+    EditMyReview, delete_my_review, test
 
 app_name = 'book'
 
 urlpatterns = [
     path('', BooksListView.as_view(), name='books_list'),
+    path('test', test, name='test'),
     path('<slug:slug>', DetailView.as_view(), name='detail_view'),
     path('my-reivews/', MyReviewsView.as_view(), name='my-reviews'),
     path('<int:review_id>/review-delete/', delete_my_review, name='delete-my-review'),

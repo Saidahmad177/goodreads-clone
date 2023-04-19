@@ -1,6 +1,18 @@
 * {
     margin: 0 0;
 }
+
+html, body {
+  height: 90%;
+}
+
+.container {
+    min-height: 100%;
+    min-height: -webkit-calc(100% - 300px);
+    min-height: -moz-calc(100% - 300px);
+    min-height: calc(100% - 300px);
+}
+
 a {color: #333; text-decoration: none}
 a:hover {text-decoration: underline}
 
@@ -31,7 +43,7 @@ a:hover {text-decoration: underline}
 .search-panel{margin-left: 100px}
 .search-panel-icon{border: none; margin-top: 4px; background: none}
 
-.nav_btn{background-color: #b9ad99; border: none}
+.nav_btn{background-color: #beb8ad; border: none}
 .nav_btn:hover{background-color: #9a9385}
 .nav_btn>a:hover{text-decoration: none}
 
@@ -57,16 +69,19 @@ a:hover {text-decoration: underline}
 .detail-post-button{padding: 4px 13px; border-radius: 3px; font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif; border: 1px solid #D6D0C4; background-color: #F4F1EA }
 .detail-post-button:hover{color: #333333; background-color: #ede6d6;}
 
-.head-div {display: flex;flex-wrap: nowrap;}
+/*.head-div {display: flex;flex-wrap: nowrap;}*/
+.head-div{display: flex;flex-direction: row;align-items: flex-start}
 
-.detail_info{flex: 1 1 auto;overflow-y: auto;overflow-x: hidden; margin-left: 270px;}
+.detail_info{flex: 1;overflow-y: auto;overflow-x: hidden; margin-left: 30px;}
 .detail_info > h1, .detail_info > h4{font-family: Copernicus,'Libre Baskerville',Georgia,serif;}
 
 .reviews-user-img{border-radius: 50%}
 
-.fixed-image {flex: 0 0 auto;position: fixed;top: 90px;left: 90px;}
+.fixed-image {flex: 0 0 auto;position: sticky;top: 90px;left: 90px;}
 .fixed-image > img {margin-left: 6px; border-radius: 0 30px 30px 0;}
 .fixed-image > h3 {margin-top: 30px; font-family: Copernicus,'Libre Baskerville',Georgia,serif;}
+
+.image-fix{position: sticky; top: 0}
 
 .detail-description{margin-right: 200px}
 
@@ -179,4 +194,3 @@ a:hover {text-decoration: underline}
     .col-6{width: 550px}
     .book_list_item{margin-left: 40px;}
 }
-

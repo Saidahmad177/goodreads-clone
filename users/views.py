@@ -6,10 +6,10 @@ from django.urls import reverse
 from django.views.generic import View
 
 from friend.models import Friends
-from .forms import SignUpForm, ProfileUpdateForm
+from .forms import SignUpForm, ProfileUpdateForm, ContactForm
 from django.contrib import messages
 
-from .models import CustomUser
+from .models import CustomUser, Contact
 
 
 # User register view
@@ -56,10 +56,8 @@ class LoginView(View):
             return redirect('home_page')
 
         else:
-            return render(request, 'users/login.html', {
-                'form': form,
-                'invalid': True,
-            })
+            messages.info(request, '❗ Wrong username or password. Please enter a correct username and password', extra_tags='danger')
+            return render(request, 'users/login.html', {'form': form,})
 
 
 # User logout view
@@ -126,3 +124,29 @@ class UserDetailView(LoginRequiredMixin, View):
 
         return render(request, 'users/user_detail.html', context)
 
+
+class ContactView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'users/contact.html')
+
+    def post(self, request):
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            Contact.objects.create(
+                user=request.user.username,
+                name=name,
+                email=email,
+                message=message,
+            )
+
+            messages.success(request, 'Your message has been sent successfully')
+
+            return redirect(reverse('users:contact'))
+
+        else:
+            messages.info(request, 'Please enter a valid value.', extra_tags='warning')
+            return redirect(reverse('users:contact'))

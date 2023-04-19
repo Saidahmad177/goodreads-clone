@@ -1,7 +1,7 @@
 from django import forms
 from django.core.mail import send_mail
 
-from users.models import CustomUser
+from users.models import CustomUser, Contact
 
 
 class SignUpForm(forms.ModelForm):
@@ -30,3 +30,8 @@ class ProfileUpdateForm(forms.ModelForm):
         model = CustomUser
         fields = ('username', 'first_name', 'last_name', 'email', 'profile_img')
 
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ('name', 'email', 'message')

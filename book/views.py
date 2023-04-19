@@ -157,3 +157,6 @@ class EditMyReview(LoginRequiredMixin, View):
 
         return render(request, 'books/review_edit.html', context)
 
+
+def test(request):
+    return render(request, 'books/test_detail.html')

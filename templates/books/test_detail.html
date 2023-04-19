@@ -1,51 +1,214 @@
-{% extends 'base.html' %}
+{#{% extends 'base.html' %}#}
+{##}
+{#{% load static %}#}
+{##}
+{#{% block title %} {{ book_detail.title }} {% endblock %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{##}
+{##}
+{#  <div class="row">#}
+{#    <div class="col-4 fixed-imag"><img src="{% static 'images/goodreads_login.jpg' %}" alt=""></div>#}
+{#    <div class="col-6">#}
+{##}
+{#        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consequatur culpa deleniti dolores est eveniet excepturi explicabo hic illum in ipsum libero modi natus necessitatibus neque numquam officiis omnis porro quis ratione rem reprehenderit soluta tenetur, ut velit vero voluptas voluptate. Cupiditate et nihil, nisi praesentium quaerat quos! Dolorem eveniet, ipsam! Ad aspernatur, consequatur cum cumque cupiditate dolore ea et exercitationem ipsam laborum maiores molestias obcaecati pariatur perspiciatis quas? Asperiores consequuntur cumque error, esse et, fugit laudantium neque non qui rem repellat unde voluptatem voluptatibus. Accusantium asperiores aut expedita fuga incidunt itaque, maiores neque, odit quaerat quos reiciendis repellendus! Totam!</h1>#}
+{#        <p>#}
+{#            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis excepturi expedita fugiat illo labore maxime natus optio quae quisquam, repudiandae rerum totam! A culpa cumque eos fugit illo iure odio quas quisquam tenetur vel. Aliquam aliquid assumenda autem blanditiis consectetur deleniti deserunt dolorum expedita explicabo fuga fugit impedit in, inventore iusto necessitatibus quam, quia quos saepe tempore totam ullam unde ut velit voluptatem voluptatibus! Aut autem doloribus eligendi, laudantium libero magni neque numquam, omnis qui quidem ratione sequi! Cum dolor dolores esse, eveniet fugit impedit totam vero! Accusantium assumenda esse eum nihil odio optio quis quos tenetur vel vero.#}
+{#            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque cupiditate dolore exercitationem fugiat itaque nisi ratione rerum ullam, voluptas voluptatem!#}
+{#        </p>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{##}
+{##}
+{#{% endblock %}#}
+{##}
 
-{% block title %} {{ book_detail.title }} {% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image and Text Layout</title>
+	<style>
+		.container {
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+		}
 
-{% block content %}
+		.image {
+			position: sticky;
+			top: 0;
+			margin-right: 20px;
+		}
 
+		.text {
+			flex: 1;
+			overflow: auto;
+		}
 
-<div class="head-div">
-  <div class="fixed-image">
-      <img class="px-3" width="220" height="300" src="{{ data.book_image.url }}" alt="image">
-      <h3>Review this book</h3>
-  </div>
-  <div class="detail_info">
-      <h1>{{ data.name }}</h1>
-      {% for author in book_author %}
-          <h4>{{ author.author_id.first_name }} {{ author.author_id.last_name }}</h4>
-      {% endfor %}
-        <p class="detail-description">{{ data.description }}</p>
-      {% for review in reviews %}
-          <hr>
-          <div class="row mt-5">
-              <div class="col-2">
-                  <img class="review-user-image" width="80" height="80" src="{{ review.user.profile_img.url }}" alt="review user image">
-                  <p class="mt-2">{{ review.user.first_name }}</p>
-              </div>
-              <div class="col-9">
-                  <p>{{ review.comment }}</p>
-              </div>
+		footer {
+			margin-top: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="image">
+			<img src="{% static 'images/goodreads_login.jpg' %}" alt="Your Image">
+            <button class="detail-post-button">asdfasdfs</button>
+		</div>
+		<div class="text">
+			<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus alias animi aperiam autem dignissimos, dolorem ducimus error excepturi facere ipsa laudantium, libero nostrum quidem quod. Adipisci dolor dolores doloribus, itaque quasi sapiente soluta tempore! Aut dicta iusto reprehenderit sed vitae. Asperiores autem consectetur dolore dolorem iste maxime modi vel voluptate. Accusantium ad assumenda aut deleniti dolore est excepturi expedita illum impedit, ipsa ipsam iste magnam nihil quia quo ratione repellat sed suscipit ullam veritatis! Ab adipisci asperiores aut consectetur culpa cupiditate exercitationem expedita impedit libero magnam necessitatibus officiis quae, quam quasi similique. At autem deleniti laboriosam maiores modi repellendus?</h1>
+			<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus alias animi aperiam autem dignissimos, dolorem ducimus error excepturi facere ipsa laudantium, libero nostrum quidem quod. Adipisci dolor dolores doloribus, itaque quasi sapiente soluta tempore! Aut dicta iusto reprehenderit sed vitae. Asperiores autem consectetur dolore dolorem iste maxime modi vel voluptate. Accusantium ad assumenda aut deleniti dolore est excepturi expedita illum impedit, ipsa ipsam iste magnam nihil quia quo ratione repellat sed suscipit ullam veritatis! Ab adipisci asperiores aut consectetur culpa cupiditate exercitationem expedita impedit libero magnam necessitatibus officiis quae, quam quasi similique. At autem deleniti laboriosam maiores modi repellendus?</h1>
+			<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus alias animi aperiam autem dignissimos, dolorem ducimus error excepturi facere ipsa laudantium, libero nostrum quidem quod. Adipisci dolor dolores doloribus, itaque quasi sapiente soluta tempore! Aut dicta iusto reprehenderit sed vitae. Asperiores autem consectetur dolore dolorem iste maxime modi vel voluptate. Accusantium ad assumenda aut deleniti dolore est excepturi expedita illum impedit, ipsa ipsam iste magnam nihil quia quo ratione repellat sed suscipit ullam veritatis! Ab adipisci asperiores aut consectetur culpa cupiditate exercitationem expedita impedit libero magnam necessitatibus officiis quae, quam quasi similique. At autem deleniti laboriosam maiores modi repellendus?</h1>
+		</div>
+	</div>
+{#	<div class="footer">#}
+{#		<p>Your footer content goes here...</p>#}
+{#	</div>#}
+
+<div class="mt-5">
+  <!-- Footer -->
+  <footer
+          class="text-center text-lg-start text-white"
+          style="background-color: #929fba;"
+          >
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">
+              Company name
+            </h6>
+            <p>
+              Here you can use rows and columns to organize your footer
+              content. Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit.
+            </p>
           </div>
-      {% endfor %}
-  </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+            <p>
+              <a class="text-white">MDBootstrap</a>
+            </p>
+            <p>
+              <a class="text-white">MDWordPress</a>
+            </p>
+            <p>
+              <a class="text-white">BrandFlow</a>
+            </p>
+            <p>
+              <a class="text-white">Bootstrap Angular</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+            <!-- Facebook -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #3b5998"
+               href="#!"
+               role="button"
+               ><i class="fab fa-facebook-f"></i
+              ></a>
+
+            <!-- Twitter -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #55acee"
+               href="#!"
+               role="button"
+               ><i class="fab fa-twitter"></i
+              ></a>
+
+            <!-- Google -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #dd4b39"
+               href="#!"
+               role="button"
+               ><i class="fab fa-google"></i
+              ></a>
+
+            <!-- Instagram -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #ac2bac"
+               href="#!"
+               role="button"
+               ><i class="fab fa-instagram"></i
+              ></a>
+
+            <!-- Linkedin -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #0082ca"
+               href="#!"
+               role="button"
+               ><i class="fab fa-linkedin-in"></i
+              ></a>
+            <!-- Github -->
+            <a
+               class="btn btn-primary btn-floating m-1"
+               style="background-color: #333333"
+               href="#!"
+               role="button"
+               ><i class="fab fa-github"></i
+              ></a>
+          </div>
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div
+         class="text-center p-3"
+         style="background-color: rgba(0, 0, 0, 0.2)"
+         >
+      © 2020 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/"
+         >MDBootstrap.com</a
+        >
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
 </div>
+</body>
+</html>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% endblock %}
 
