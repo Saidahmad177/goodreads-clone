@@ -8,7 +8,7 @@ from users.tasks import send_email
 @receiver(post_save, sender=CustomUser)
 def send_welcome_email(sender, instance, created, **kwargs):
     if created:
-        send_email(
+        send_email.delay(
             "Welcome to Goodreads.com",
             f"Hi {instance.username}. Welcome to Goodreads. Enjoy the books and reviews.",
             [instance.email]
